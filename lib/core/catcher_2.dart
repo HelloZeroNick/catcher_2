@@ -205,6 +205,8 @@ class Catcher2 {
         _loadAndroidParameters(await deviceInfo.androidInfo);
       } else if (Platform.isIOS) {
         _loadIosParameters(await deviceInfo.iosInfo);
+      } else if (Platform.operatingSystem == "ohos") {
+        _loadOhosParameters(await deviceInfo.ohosInfo);
       } else {
         logger.w("Couldn't load device info for unsupported device type.");
       }
@@ -315,6 +317,50 @@ class Catcher2 {
       deviceParameters['utsnameSysname'] = iosInfo.utsname.sysname;
     } catch (exception) {
       logger.w('Load iOS parameters failed', error: exception);
+    }
+  }
+
+  void _loadOhosParameters(OhosDeviceInfo ohosInfo) {
+    try {
+      deviceParameters['deviceType'] = ohosInfo.deviceType;
+      deviceParameters['manufacture'] = ohosInfo.manufacture;
+      deviceParameters['brand'] = ohosInfo.brand;
+      deviceParameters['marketName'] = ohosInfo.marketName;
+      deviceParameters['productSeries'] = ohosInfo.productSeries;
+      deviceParameters['productModel'] = ohosInfo.productModel;
+      deviceParameters['softwareModel'] = ohosInfo.softwareModel;
+      deviceParameters['hardwareModel'] = ohosInfo.hardwareModel;
+      deviceParameters['hardwareProfile'] = ohosInfo.hardwareProfile;
+      deviceParameters['serial'] = ohosInfo.serial;
+      deviceParameters['bootloaderVersion'] = ohosInfo.bootloaderVersion;
+      deviceParameters['abiList'] = ohosInfo.abiList;
+      deviceParameters['securityPatchTag'] = ohosInfo.securityPatchTag;
+      deviceParameters['displayVersion'] = ohosInfo.displayVersion;
+      deviceParameters['incrementalVersion'] = ohosInfo.incrementalVersion;
+      deviceParameters['osReleaseType'] = ohosInfo.osReleaseType;
+      deviceParameters['osFullName'] = ohosInfo.osFullName;
+      deviceParameters['majorVersion'] = ohosInfo.majorVersion;
+      deviceParameters['seniorVersion'] = ohosInfo.seniorVersion;
+      deviceParameters['featureVersion'] = ohosInfo.featureVersion;
+      deviceParameters['buildVersion'] = ohosInfo.buildVersion;
+      deviceParameters['sdkApiVersion'] = ohosInfo.sdkApiVersion;
+      deviceParameters['firstApiVersion'] = ohosInfo.firstApiVersion;
+      deviceParameters['versionId'] = ohosInfo.versionId;
+      deviceParameters['buildType'] = ohosInfo.buildType;
+      deviceParameters['buildUser'] = ohosInfo.buildUser;
+      deviceParameters['buildHost'] = ohosInfo.buildHost;
+      deviceParameters['buildTime'] = ohosInfo.buildTime;
+      deviceParameters['buildRootHash'] = ohosInfo.buildRootHash;
+      deviceParameters['udid'] = ohosInfo.udid;
+      deviceParameters['distributionOSName'] = ohosInfo.distributionOSName;
+      deviceParameters['distributionOSVersion'] = ohosInfo.distributionOSVersion;
+      deviceParameters['distributionOSApiVersion'] =
+          ohosInfo.distributionOSApiVersion;
+      deviceParameters['distributionOSReleaseType'] =
+          ohosInfo.distributionOSReleaseType;
+      deviceParameters['odID'] = ohosInfo.odID;
+    } catch (exception) {
+      logger.w('Load Ohos parameters failed', error: exception);
     }
   }
 
